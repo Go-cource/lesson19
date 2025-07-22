@@ -12,7 +12,7 @@ const (
 
 func foo() {
 	for {
-		var arr []int
+		var arr = make([]int, 0, maxSize)
 		for i := 0; i < maxSize; i++ {
 			arr = append(arr, i)
 		}
