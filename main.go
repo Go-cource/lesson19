@@ -1,7 +1,12 @@
 package main
 
+import (
+	"net/http"
+	_"net/http/pprof"
+)
+
 const (
-	arrd    = "localhost:8080"
+	arrd    = ":8080"
 	maxSize = 10000000
 )
 
@@ -15,4 +20,5 @@ func foo() {
 }
 func main() {
 	go foo()
+	http.ListenAndServe(arrd, nil)
 }
