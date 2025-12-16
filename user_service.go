@@ -1,12 +1,27 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 )
 
-func userHandler(w http.ResponseWriter, r *http.Request) {
+type User struct {
+	Id   string
+	Name string
+}
 
+var Ivan User = User{Id: "1", Name: "Ivan"}
+
+func userHandler(w http.ResponseWriter, r *http.Request) {
+	id := r.URL.Path[len("/user/"):]
+	if id == Ivan.Id {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(Ivan)
+	} else {
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(User{Id: "0", Name: "Not Ivan"})
+	}
 }
 
 func main() {
