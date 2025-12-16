@@ -20,7 +20,7 @@ func userHandler(w http.ResponseWriter, r *http.Request) {
 		json.NewEncoder(w).Encode(Ivan)
 	} else {
 		w.Header().Set("Content-Type", "application/json")
-		json.NewEncoder(w).Encode(User{Id: "0", Name: "Not Ivan"})
+		json.NewEncoder(w).Encode(User{Id: "0", Name: "Guest"})
 	}
 }
 
@@ -28,7 +28,7 @@ func main() {
 
 	http.HandleFunc("/user/", userHandler)
 
-	log.Println("User service started...")
+	log.Println("Greeter service started...")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal("8000 - err")
 	}
